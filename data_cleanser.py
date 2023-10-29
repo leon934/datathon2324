@@ -217,4 +217,43 @@ def r_visualizer(df):
 # Prints out all of the data and puts the graphs in the corresponding folder.
 # print(r_visualizer(df))
 
-df.to_csv("./TD_HOSPITAL_TRAIN_SCRAP.csv", index=False)
+weightings = {
+    'primary': {
+        'Cirrhosis': 6.50,
+        'Colon Cancer': 8.40,
+        'ARF/MOSF w/Sepsis': 5.80,
+        'COPD': 5.80,
+        'Lung Cancer': 8.90,
+        'Coma': 8.00,
+        'CHF': 6.10,
+        'MOSF w/Malig': 8.90
+    },
+    'dnr': {
+        'no dnr': 5.5254,
+        'dnr before sadm': 8.54,
+        'dnr after sadm': 9.02,
+    },
+    'disability': {'<2 mo. follow-up' : 9.78,
+                'no(M2 and SIP pres)' : 4.7,
+                'SIP>=30' : 5.39,
+                'adl>=4 (>=5 if sur)' : 5.95,
+                'Coma or Intub' : 7.037
+                },
+    'cancer': {
+        'metastatic': 8.756,
+        'no': 5.96,
+        'yes': 7.53
+    },
+    'extraprimary': {
+        'COPD/CHF/Cirrhosis' : 6.122,
+                    'Cancer' : 8.696,
+                    'ARF/MOSF' : 6.2826,
+                    'Coma' : 8.06
+    }
+}
+
+for key in weightings:
+    for subkey in weightings[key]:
+        df.loc[df[key] == subkey, key] = weightings[key].get(subkey, 0)
+
+df.to_csv("./TD_HOSPITAL_TRAIN_PARSED.csv", index=False)
