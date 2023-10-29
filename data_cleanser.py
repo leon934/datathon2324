@@ -90,6 +90,12 @@ def alter_dataset(df):
 
 alter_dataset(df)
 
+ranges = [
+    ('bp', 130, 60),
+    ('age', 120, 0),
+    ('heart', 150, 40),
+]
+
 # Replaces the outliers with NaN values in given column name.
 def replace_range(df, column_name, max_range, min_range, value):
     df.loc[df[column_name] > max_range, column_name] = value
@@ -99,6 +105,9 @@ def replace_range(df, column_name, max_range, min_range, value):
 def trim_range(df, column_name, max_range, min_range):
     df = df[df[column_name] < max_range]
     df = df[df[column_name] > min_range]
+
+for key, max_range, min_range in ranges:
+    trim_range(df, key, max_range, min_range)
 
 # Takes in the dictionary above and formats it into a bar graph.
 def death_rate_visualizer(df, dict, x):
