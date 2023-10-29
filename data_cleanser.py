@@ -88,6 +88,8 @@ def alter_dataset(df):
         elif df.loc[i, 'sex'] == '1':
             df.loc[i, 'sex'] = np.NaN
 
+alter_dataset(df)
+
 # Replaces the outliers with NaN values in given column name.
 def replace_range(df, column_name, max_range, min_range, value):
     df.loc[df[column_name] > max_range, column_name] = value
