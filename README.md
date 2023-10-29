@@ -1,5 +1,4 @@
 # Data Cleanser
-
 This is a simple data cleansing tool that parses information from a hospital's CSV file and converts it into useful information for machine learning algorithms aimed to predict the probability of a patient dying.
 
 ## Unnecessary Columns
@@ -19,6 +18,7 @@ It also parses categorical data into numeric formats. This data comes from the R
 ## Statistical Analysis
 Finally, the tool also performs statistical analysis and sees if specific columns have a correlation with the death of a patient. This step is done manually and the specific columns must be analyzed by a human to see if they are relevant to the prediction. Columns with bad correlation can be removed in the first step mentioned above.
 
+For example, when faced with data that a wide range, we decided to use a hyperbolic tangent function with some transformations in order to accurately provide our machine learning model with precise data. We also utilized R squared values in order to predict correlation between datapoints and effectively remove them in order to offer better data to our model.
 
 # Usage
 This tool is written in Python and requires the following libraries:
